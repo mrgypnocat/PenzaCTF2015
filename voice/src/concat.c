@@ -423,13 +423,13 @@ int main (int argc, char** argv)
         if (!strcmp(cmd, "DOWNLOAD")) {
 
                 char *stat = malloc(strlen(login) + strlen(password) + 0xFF);
-                sprintf(stat, "stat '%s:%s/voice.wav' >>/dev/null 2>&1", login, password);
+                sprintf(stat, "stat '%s:%s/voice.wav.gz' >>/dev/null 2>&1", login, password);
 
                 int res = system(stat);
 
                 if (!res) {
                         char *file = malloc(strlen(login) + strlen(password) + 0xFF);
-                        sprintf(file, "%s:%s/voice.wav", login, password);
+                        sprintf(file, "%s:%s/voice.wav.gz", login, password);
 
                         unsigned char *buf;
                         int len = read_file(file, &buf);
@@ -470,6 +470,11 @@ int main (int argc, char** argv)
                 if (res < 0) {
                         return -EIO;
                 }
+
+                char *cmd = malloc(strlen(login) + strlen(password) + 0xFF);
+                sprintf(cmd, "gzip %s:%s/voice.wav", login, password);
+
+                system(cmd);
 
         } else {
                 printf("NOT SUPPORTED\n");
