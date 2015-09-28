@@ -1,0 +1,10 @@
+#include <voice/numbers/0.h>
+#include <voice/numbers/1.h>
+#include <voice/numbers/2.h>
+#include <voice/numbers/3.h>
+#include <voice/numbers/4.h>
+#include <voice/numbers/5.h>
+#include <voice/numbers/6.h>
+#include <voice/numbers/7.h>
+#include <voice/numbers/8.h>
+#include <voice/numbers/9.h>
