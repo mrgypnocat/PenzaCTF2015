@@ -5,15 +5,19 @@
 from socket import socket
 from peewee import *
 from time import strftime, sleep
-import gmpy2
 from threading import Thread, current_thread
-import re
+from collections import namedtuple
+import Crypto
+from Crypto.PublicKey import RSA
+from Crypto import Random
 
 
 #globals
 db = SqliteDatabase('database.db')
 PORT = 33333
 ADDRESS = '127.0.0.1'
+
+Command = namedtuple("Command", "command user pub_key priv_key data_id data")
 
 
 #functions
@@ -25,17 +29,29 @@ def log(message):
 
 
 def Parse(data):
-    print(str(data))
     commands = ['?', 'register', 'insert', 'select', 'get']
-    for command in commands:
-        print(command)
-        if re.findall(command, str(data)) == []:
-            #message.command = command
-            print(command)
-        else:
-            #message.command = command
-            print(command)
-        print(message)
+    message = Command(command="", user="", pub_key="",
+        priv_key="", data_id="", data="")
+    tmp = str(data).replace('\n', '').split(' ')
+    print(tmp)
+    for i in commands:
+        if tmp[0].find(i):
+            message = message._replace(command=i)
+            break
+    if (message.command == 'insert'):
+        message = message._replace(user=tmp[1])
+        message = message._replace(data=tmp[2])
+        message = message._replace(data_id=tmp[3])
+    elif (message.command == 'select'):
+        message = message._replace(use=tmp[1])
+        message = message._replace(data_id=tmp[2])
+    elif (message.command == 'register'):
+        message = message._replace(user=tmp[1])
+    elif (message.command == 'get'):
+        message = message._replace(user=tmp[1])
+    else:
+        message = message._replace(command="?")
+
     return message
 
 
@@ -95,7 +111,7 @@ class DataBaseConnector():
         with db.transaction():
             try:
                 query = User.select(User).where((User.name == user))
-                return str(query[0].data) # возвращать ключ и ip
+                return str(query[0].data)  # возвращать ключ и ip
             except Exception as ex:
                 return(str('Failed to get data due to the reason: {0}'.format(ex)))
 
@@ -122,43 +138,46 @@ class ServerThread(Thread):
 
         self.conn.sendall('Enter your command ("?" for help):\n'.encode('utf-8'))
         while True:
-            data = self.conn.recv(1024) # максимальный размер сообщения
+            data = self.conn.recv(1024)  # максимальный размер сообщения
             if not data:
                 log('no command from ' + str(self.addr))
                 return
             break
         log('got data ' + str(data) + ' from ' + str(self.addr))
 
-        # разбор команды
         message = Parse(data)
-        log('parsed message ' + message + ' from ' + str(self.addr))
+        print(message.command)
         # добавить генерацию или выбор ключа по username
-        user_pub_key  = '1234567890'
-        user_private_key = '0123456789'
+        random_generator = Random.new().read
+        key = RSA.generate(1024, random_generator)
+
         connector = DataBaseConnector()
+        user_pub_key = connector.GetUserKey(message.user)
+
         if (message.command == 'insert'):
-            # сюды добавить pub key
             connector.InsertData(message.user, str(self.addr),
                                 user_pub_key, message.data, message.data_id)
             answer = "Data inserted\n"
         elif (message.command == 'select'):
             answer = connector.SelectData(message.user, message.data_id)
         elif (message.command == 'register'):
+            user_pub_key = key.publickey()
+            user_private_key = key.privatekey()
             connector.RegisterUser(message.user, str(self.addr), user_pub_key)
-            anwer = 'Register OK. Your keys is\n Public Key: ' + \
+            answer = 'Register OK. Your keys is\n Public Key: ' + \
                 str(user_pub_key) + ' \n Private Key: ' + str(user_private_key)
         # получение о.к. по нику
         elif (message.command == 'get'):
-            anwer = connector.GetUserKey(message.user, user_pub_key)
+            answer = connector.GetUserKey(message.user, user_pub_key)
         elif (message.command == '?'):
-            anwer = "Usage: \n register <username>\n insert <username> " + \
+            answer = "Usage: \n register <username>\n insert <username> " + \
                 "<data> <data_id>\n select <username> <data_id>\n get " + \
                 "<username> \n"
         else:
             anwer = "Unknown command"
+        print(answer)
         # pack message
         self.conn.sendall(answer.encode('utf-8'))
-
 
     def run(self):
 
@@ -189,7 +208,6 @@ class Wait(Thread):
 
 #main
 if __name__ == "__main__":
-
     sock = socket()
     #sock.settimeout(5)
     sock.bind((ADDRESS, PORT))  # адрес и порт сервиса
