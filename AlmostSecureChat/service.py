@@ -10,6 +10,7 @@ from collections import namedtuple
 import Crypto
 from Crypto.PublicKey import RSA
 from Crypto import Random
+from Crypto.Hash import SHA256
 
 
 #globals
@@ -17,7 +18,8 @@ db = SqliteDatabase('database.db')
 PORT = 33333
 ADDRESS = '127.0.0.1'
 
-Command = namedtuple("Command", "command user pub_key priv_key data_id data")
+Command = namedtuple("Command",
+    "command user pub_key priv_key data_id data signature")
 
 
 #functions
@@ -31,8 +33,9 @@ def log(message):
 def Parse(data):
     commands = ['?', 'register', 'insert', 'select', 'get']
     message = Command(command="", user="", pub_key="",
-        priv_key="", data_id="", data="")
-    tmp = str(data).replace('\n', '').replace('\\n', '').replace("b'", '').replace("'", "").split(' ')
+        priv_key="", data_id="", data="", signature="")
+    tmp = str(data).replace('\n', '').replace('\\n', '').replace("b'", '') \
+        .replace("'", "").split(' ')
     for i in commands:
         if tmp[0].find(i) != -1:
             message = message._replace(command=i)
@@ -41,9 +44,11 @@ def Parse(data):
         message = message._replace(user=tmp[1])
         message = message._replace(data=tmp[2])
         message = message._replace(data_id=tmp[3])
+        message = message._replace(signature=tmp[4])
     elif (message.command == 'select'):
         message = message._replace(user=tmp[1])
         message = message._replace(data_id=tmp[2])
+        message = message._replace(signature=tmp[3])
     elif (message.command == 'register'):
         message = message._replace(user=tmp[1])
     elif (message.command == 'get'):
@@ -57,7 +62,7 @@ def Parse(data):
 #classes
 class User(Model):
     name = CharField(unique=True)
-    ip = CharField(unique=True)
+    ip = CharField()
     PubKey = CharField(unique=True)
 
     class Meta:
@@ -101,8 +106,8 @@ class DataBaseConnector():
         print(user, data_id)
         with db.transaction():
             try:
-                query = Data.select(Data, User).join(User).where((User.name == user)
-                                                & (Data.data_id == data_id))
+                query = Data.select(Data, User).join(User).where(
+                    (User.name == user) & (Data.data_id == data_id))
                 return str(query[0].data)
             except Exception as ex:
                 return(str('Failed to get data due to the reason: {0}'.format(ex)))
@@ -111,7 +116,7 @@ class DataBaseConnector():
         with db.transaction():
             try:
                 query = User.select(User).where((User.name == user))
-                return str(query[0].PubKey), str(query[0].ip)  # возвращать ключ и ip
+                return str(query[0].PubKey), str(query[0].ip)
             except Exception as ex:
                 return(str('Failed to get data due to the reason: {0}'.format(ex)))
 
@@ -146,8 +151,6 @@ class ServerThread(Thread):
         log('got data ' + str(data) + ' from ' + str(self.addr))
 
         message = Parse(data)
-        print(message)
-        # добавить генерацию или выбор ключа по username
         random_generator = Random.new().read
         key = RSA.generate(1024, random_generator)
 
@@ -156,25 +159,52 @@ class ServerThread(Thread):
         if (message.command == 'insert'):
             # check sign
             user_pub_key, user_ip = connector.GetUserKey(message.user)
-            connector.InsertData(message.user, str(self.addr[0]),
+            data_string = message.command + message.user + message.data \
+                 + message.data_id
+            hash = SHA256.new()
+            hash.update(data_string.encode("utf-8"))
+            hash_string = hash.digest()
+            wow = RSA.importKey(user_pub_key)
+            emsg = wow.encrypt(hash_string, None)
+            if (emsg == message.signature):
+                connector.InsertData(message.user, str(self.addr[0]),
                                 user_pub_key, message.data, message.data_id)
-            answer = "Data inserted\n"
+                answer = "Data inserted\n"
+            else:
+                answer = "Wrong signature\n"
+
         elif (message.command == 'select'):
-            answer = connector.SelectData(message.user, message.data_id)
+            # check sign
+            user_pub_key, user_ip = connector.GetUserKey(message.user)
+            data_string = message.command + message.user + message.data_id
+            hash = SHA256.new()
+            hash.update(data_string.encode("utf-8"))
+            hash_string = hash.digest()
+            wow = RSA.importKey(user_pub_key)
+            emsg = wow.encrypt(hash_string, None)
+            if (emsg == message.signature):
+                answer = connector.SelectData(message.user, message.data_id)
+            else:
+                answer = "Wrong signature\n"
+
         elif (message.command == 'register'):
             user_pub_key = key.publickey().exportKey("PEM")
             user_private_key = key.exportKey("PEM")
-            connector.RegisterUser(message.user, str(self.addr[0]), user_pub_key)
+            connector.RegisterUser(message.user,
+                str(self.addr[0]),
+                user_pub_key)
             answer = 'Register OK. Your keys is\n Public Key: ' + \
                 str(user_pub_key) + ' \n Private Key: ' + str(user_private_key)
+
         elif (message.command == 'get'):
-            # check sign
             user_pub_key, user_ip = connector.GetUserKey(message.user)
             answer = user_pub_key + "\n" + user_ip
+
         elif (message.command == '?'):
             answer = "Usage: \n register <username>\n insert <username> " + \
-                "<data> <data_id>\n select <username> <data_id>\n get " + \
-                "<username> \n"
+                "<data> <data_id> <signature>\n select <username> " + \
+                "<data_id> <signature>\n get <username> \n"
+
         else:
             anwer = "Unknown command"
         print(answer)
@@ -216,5 +246,3 @@ if __name__ == "__main__":
     sock.listen(100)  # одновременное число игроков
     log('wait for client')
     Wait(sock).start()
-
-
