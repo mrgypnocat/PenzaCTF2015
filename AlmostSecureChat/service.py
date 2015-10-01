@@ -32,10 +32,9 @@ def Parse(data):
     commands = ['?', 'register', 'insert', 'select', 'get']
     message = Command(command="", user="", pub_key="",
         priv_key="", data_id="", data="")
-    tmp = str(data).replace('\n', '').split(' ')
-    print(tmp)
+    tmp = str(data).replace('\n', '').replace('\\n', '').replace("b'", '').replace("'", "").split(' ')
     for i in commands:
-        if tmp[0].find(i):
+        if tmp[0].find(i) != -1:
             message = message._replace(command=i)
             break
     if (message.command == 'insert'):
@@ -43,7 +42,7 @@ def Parse(data):
         message = message._replace(data=tmp[2])
         message = message._replace(data_id=tmp[3])
     elif (message.command == 'select'):
-        message = message._replace(use=tmp[1])
+        message = message._replace(user=tmp[1])
         message = message._replace(data_id=tmp[2])
     elif (message.command == 'register'):
         message = message._replace(user=tmp[1])
@@ -99,6 +98,7 @@ class DataBaseConnector():
             dataRec.save()
 
     def SelectData(self, user, data_id):
+        print(user, data_id)
         with db.transaction():
             try:
                 query = Data.select(Data, User).join(User).where((User.name == user)
@@ -111,7 +111,7 @@ class DataBaseConnector():
         with db.transaction():
             try:
                 query = User.select(User).where((User.name == user))
-                return str(query[0].data)  # возвращать ключ и ip
+                return str(query[0].PubKey), str(query[0].ip)  # возвращать ключ и ip
             except Exception as ex:
                 return(str('Failed to get data due to the reason: {0}'.format(ex)))
 
@@ -146,29 +146,31 @@ class ServerThread(Thread):
         log('got data ' + str(data) + ' from ' + str(self.addr))
 
         message = Parse(data)
-        print(message.command)
+        print(message)
         # добавить генерацию или выбор ключа по username
         random_generator = Random.new().read
         key = RSA.generate(1024, random_generator)
 
         connector = DataBaseConnector()
-        user_pub_key = connector.GetUserKey(message.user)
 
         if (message.command == 'insert'):
-            connector.InsertData(message.user, str(self.addr),
+            # check sign
+            user_pub_key, user_ip = connector.GetUserKey(message.user)
+            connector.InsertData(message.user, str(self.addr[0]),
                                 user_pub_key, message.data, message.data_id)
             answer = "Data inserted\n"
         elif (message.command == 'select'):
             answer = connector.SelectData(message.user, message.data_id)
         elif (message.command == 'register'):
-            user_pub_key = key.publickey()
-            user_private_key = key.privatekey()
-            connector.RegisterUser(message.user, str(self.addr), user_pub_key)
+            user_pub_key = key.publickey().exportKey("PEM")
+            user_private_key = key.exportKey("PEM")
+            connector.RegisterUser(message.user, str(self.addr[0]), user_pub_key)
             answer = 'Register OK. Your keys is\n Public Key: ' + \
                 str(user_pub_key) + ' \n Private Key: ' + str(user_private_key)
-        # получение о.к. по нику
         elif (message.command == 'get'):
-            answer = connector.GetUserKey(message.user, user_pub_key)
+            # check sign
+            user_pub_key, user_ip = connector.GetUserKey(message.user)
+            answer = user_pub_key + "\n" + user_ip
         elif (message.command == '?'):
             answer = "Usage: \n register <username>\n insert <username> " + \
                 "<data> <data_id>\n select <username> <data_id>\n get " + \
