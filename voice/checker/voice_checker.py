@@ -134,7 +134,7 @@ class VoiceChecker(Checker):
             raise ServiceMumbleException()
 
         except Exception as e:
-            print(e, file=sys.stderr)
+            print(e, file=stderr)
             raise ServiceDownException()
 
     """
@@ -199,7 +199,7 @@ class VoiceChecker(Checker):
             raise ServiceMumbleException()
 
         except Exception as e:
-            print(e, file=sys.stderr)
+            print(e, file=stderr)
             raise ServiceDownException()
 
     def chk(self, host, port):
