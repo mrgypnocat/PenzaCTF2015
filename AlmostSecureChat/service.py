@@ -152,7 +152,7 @@ class ServerThread(Thread):
         log('got data ' + str(data) + ' from ' + str(self.addr))
 
         message = Parse(data)
-        Random.seed()
+
         random_generator = Random.new().read
         key = RSA.generate(1024, random_generator)
 

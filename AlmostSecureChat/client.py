@@ -21,6 +21,13 @@ Command = namedtuple("Command",
     "command user pub_key priv_key data_id data signature")
 
 
+class User:
+
+    def __init__(self, key, IP):
+        self.IP = IP
+        self.pubkey = key
+
+
 #functions
 def SConnect(serverIP):
 
@@ -29,10 +36,10 @@ def SConnect(serverIP):
     try:
         f = open(pr_key_file, 'rb')
         key = RSA.importKey(f.read())
-        key_present = 1
+        key_present = True
         uname = input('Set username for key: ')
     except:
-        key_present = 0
+        key_present = False
 
     UserBase = dict()
 
@@ -68,7 +75,7 @@ def SConnect(serverIP):
             key = RSA.importKey(pubkey_str)
             f = open("KeyFile" + uname, 'wb')
             f.write(pubkey_str.encode('utf-8'))
-            key_present = 1
+            key_present = True
 
         cmd = input('select <data_id>: get data with data_id\n' +
             'insert <data> <data_id>: save data with data_id\n' +
