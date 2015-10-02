@@ -14,6 +14,12 @@ export GOPATH=$(realpath ./)
 #go build -ldflags "${LDFLAGS}" -o path/to/binary src/source/source.go
 go build -o release/honeyclicker src/honeyclicker/service/*.go
 
+go build -o checker/honeyclicker_checker src/honeyclicker/checker/*.go
+
+checker/honeyclicker_checker gen
+mv honey_pub.pem release/
+mv honey_priv.pem checker/
+
 END_TIME=`date +%s`
 RUN_TIME=$((END_TIME-START_TIME))
 echo "Build done in ${RUN_TIME}s"
