@@ -12,7 +12,7 @@ LDFLAGS+=" -X main.BUILD_TIME ${BUILD_TIME}"
 export GOPATH=$(realpath ./)
 
 #go build -ldflags "${LDFLAGS}" -o path/to/binary src/source/source.go
-go build -o release/honeyclicker src/service/service.go
+go build -o release/honeyclicker src/honeyclicker/service/*.go
 
 END_TIME=`date +%s`
 RUN_TIME=$((END_TIME-START_TIME))
