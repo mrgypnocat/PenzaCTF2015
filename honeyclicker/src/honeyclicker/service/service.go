@@ -126,7 +126,7 @@ func cookieHandler(ws *websocket.Conn) {
 	cookie := fmt.Sprintf("%x", rand_buf)
 	fmt.Fprintln(ws, cookie)
 
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 100; i++ {
 
 		user_cookie, err := bufio.NewReader(ws).ReadString('\n')
 		if err != nil {

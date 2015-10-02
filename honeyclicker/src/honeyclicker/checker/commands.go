@@ -70,7 +70,7 @@ func svc_get(host string, port int, state string) (
 		return
 	}
 
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 100; i++ {
 		_, err = fmt.Fprint(ws, cred)
 		if err != nil {
 			status = STATUS_MUMBLE
