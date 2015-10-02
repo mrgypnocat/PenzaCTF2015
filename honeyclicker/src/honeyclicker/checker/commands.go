@@ -91,7 +91,28 @@ func svc_get(host string, port int, state string) (
 
 func svc_chk(host string, port int) (status ServiceState, err error) {
 
-	status = STATUS_UP // TODO Check md5 of page
+	addr := fmt.Sprintf("%s:%d", host, 9000) // another port for send flag
+
+	conn, err := net.Dial("tcp", addr)
+	if err != nil {
+		status = STATUS_DOWN
+		err = nil
+		return
+	}
+
+	defer conn.Close()
+
+	origin := fmt.Sprintf("http://%s:%d/", host, port)
+	url := fmt.Sprintf("ws://%s:%d/cookie", host, port)
+
+	ws, err := websocket.Dial(url, "", origin)
+	if err != nil {
+		status = STATUS_DOWN
+		err = nil
+		return
+	}
+
+	defer ws.Close()
 
 	return
 }
