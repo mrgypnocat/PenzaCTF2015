@@ -11,7 +11,7 @@ import Crypto
 from Crypto.PublicKey import RSA
 from Crypto import Random
 from Crypto.Hash import SHA256
-
+import binascii
 
 #globals
 db = SqliteDatabase('database.db')
@@ -35,7 +35,8 @@ def Parse(data):
     message = Command(command="", user="", pub_key="",
         priv_key="", data_id="", data="", signature="")
     tmp = str(data).replace('\n', '').replace('\\n', '').replace("b'", '') \
-        .replace("'", "").split(' ')
+        .replace("'", "").replace('b"', '').replace('"', '').split(' ')
+
     for i in commands:
         if tmp[0].find(i) != -1:
             message = message._replace(command=i)
@@ -151,6 +152,7 @@ class ServerThread(Thread):
         log('got data ' + str(data) + ' from ' + str(self.addr))
 
         message = Parse(data)
+
         random_generator = Random.new().read
         key = RSA.generate(1024, random_generator)
 
@@ -165,8 +167,8 @@ class ServerThread(Thread):
             hash.update(data_string.encode("utf-8"))
             hash_string = hash.digest()
             wow = RSA.importKey(user_pub_key)
-            emsg = wow.encrypt(hash_string, None)
-            if (emsg == message.signature):
+            emsg = wow.decrypt(binascii.unhexlify(message.signature))
+            if (emsg == hash_string):
                 connector.InsertData(message.user, str(self.addr[0]),
                                 user_pub_key, message.data, message.data_id)
                 answer = "Data inserted\n"
@@ -181,8 +183,8 @@ class ServerThread(Thread):
             hash.update(data_string.encode("utf-8"))
             hash_string = hash.digest()
             wow = RSA.importKey(user_pub_key)
-            emsg = wow.encrypt(hash_string, None)
-            if (emsg == message.signature):
+            emsg = wow.decrypt(binascii.unhexlify(message.signature))
+            if (emsg == hash_string):
                 answer = connector.SelectData(message.user, message.data_id)
             else:
                 answer = "Wrong signature\n"
@@ -192,7 +194,7 @@ class ServerThread(Thread):
             user_private_key = key.exportKey("PEM")
             connector.RegisterUser(message.user,
                 str(self.addr[0]),
-                user_pub_key)
+                user_private_key)
             answer = 'Register OK. Your keys is\n Public Key: ' + \
                 str(user_pub_key) + ' \n Private Key: ' + str(user_private_key)
 
@@ -204,7 +206,6 @@ class ServerThread(Thread):
             answer = "Usage: \n register <username>\n insert <username> " + \
                 "<data> <data_id> <signature>\n select <username> " + \
                 "<data_id> <signature>\n get <username> \n"
-
         else:
             anwer = "Unknown command"
         print(answer)
