@@ -26,17 +26,15 @@ const (
 	// Service is online, serves the requests, stores and
 	// returns flags and behaves as expected
 	STATUS_UP ServiceState = iota
-	// Service is online, but behaves not as expected, e.g. if HTTP server
-	// listens the port, but doesn't respond on request
-	STATUS_MUMBLE
-	// Service is online, but past flags cannot be retrieved
-	STATUS_CORRUPT
-	// Service is offline
-	STATUS_DOWN
 	// Checker error
 	STATUS_ERROR
-	// Unknown
-	STATUS_UNKNOWN
+	// Service is online, but past flags cannot be retrieved
+	STATUS_MUMBLE
+	// Service is offline
+	STATUS_CORRUPT
+	// Service is online, but behaves not as expected, e.g. if HTTP server
+	// listens the port, but doesn't respond on request
+	STATUS_DOWN
 )
 
 var (
