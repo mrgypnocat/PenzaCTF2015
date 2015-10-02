@@ -146,7 +146,7 @@ func main() {
 	const (
 		key_name      string = "honey_pub.pem"
 		receiver_addr string = ":9000"
-		frontend_addr string = ":9001"
+		frontend_addr string = ":80"
 	)
 
 	bin_dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
