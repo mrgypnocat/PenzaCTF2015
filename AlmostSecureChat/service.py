@@ -11,7 +11,6 @@ import Crypto
 from Crypto.PublicKey import RSA
 from Crypto import Random
 from Crypto.Hash import SHA256
-
 import binascii
 
 #globals
@@ -37,7 +36,7 @@ def Parse(data):
         priv_key="", data_id="", data="", signature="")
     tmp = str(data).replace('\n', '').replace('\\n', '').replace("b'", '') \
         .replace("'", "").replace('b"', '').replace('"', '').split(' ')
-		
+
     for i in commands:
         if tmp[0].find(i) != -1:
             message = message._replace(command=i)
