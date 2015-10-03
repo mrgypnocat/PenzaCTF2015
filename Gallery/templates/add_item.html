@@ -1,0 +1,22 @@
+<{% extends "base.html" %}
+	{% block body %}
+		<form enctype="multipart/form-data" class="form-horizontal col-sm-8 col-sm-offset-2 text-center" action="/add" accept-charset="utf-8" method="POST">
+			<p class="h4 text-primary">Adding new post</p>
+			<div class="form-group">
+				<p>
+					<textarea cols="100" rows="1" class="form-control" id="title" name="title" placeholder="Comment title" maxlength="300" required></textarea>
+				</p>
+				<p>
+					<textarea cols="100" rows="6" class="form-control" id="text" name="text" placeholder="Comment text" maxlength="300"></textarea>
+				</p>
+				<p>
+					<textarea cols="100" rows="1" class="form-control" id="notes" name="notes" placeholder="Notes" maxlength="300"></textarea>
+				</p>
+			</div>
+			<button class="btn btn-large text-primary" type="submit" value="upload">Submit</button>
+			<span class="btn btn-default btn-file">
+				<input type="file" name="file">
+			</span>
+			<button class="btn btn-large text-primary" type="submit"><a href="/">Cancel</a></button>
+		</form>
+	{% end %}

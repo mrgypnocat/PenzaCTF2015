@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+	{% block body %}
+			<h3 class="text-center">My posts</h3>
+			<div class="bs-example">
+				<ul class="media-list">
+					{% if entries %}
+					{% for entry in entries %}
+					<li class="media">
+						<div class="media-body">
+							<h2 class="media-heading">
+								<a href="/post/{{entry.id}}">
+								{{ entry.title }}
+								</a>
+							</h2>
+							<h6 class="text-muted">
+								{{ locale.format_date(entry.published, full_format=True) }}
+								from
+								{{ entry.name }}
+							</h6>
+							{% if entry.filepath %}
+							<div class="row">
+								<div class="span4"></div>
+								<div class="span4">
+									<img class="center-block" alt="place for ADS" width="80%" src="{{ static_url(entry.filepath) }}" border="5"/>
+								</div>
+								<div class="span4"></div>
+							</div>
+							{% end %}
+							{% if entry.author_enabled %}
+							<h4 class="h5 text-primary text-center">
+								My notes:
+								<span>
+									{{ entry.hidden_text}}	
+								</span>								
+								<p class="h4">
+									<a href="/edit/{{ entry.id }}">
+										Edit
+									</a>
+									<a href="/delete/{{ entry.id }}">
+										Delete
+									</a>
+								</p>
+							</h4>
+							{% end %}
+							<h4>
+								{{ entry.text}}
+							</h4>
+						</div>
+						<br>
+						<a href="/post/{{entry.id}}">
+						  View comments ({{entry.comments}})
+						</a>
+						{% if entry.author_enabled %}
+						<a href="/edit/{{entry.id}}">
+						  Edit
+						</a>
+						{% end %}
+						<hr>
+					</li>
+					{% end %}
+					{% end %}
+				</ul>			
+			</div>
+			<a href="javascript:scroll(0,0)">Scroll to top</a>
+	{% end %}
