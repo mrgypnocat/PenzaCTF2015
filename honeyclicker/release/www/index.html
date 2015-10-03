@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Honey Clicker!</title>
+    <style> body { background-color: #35393c; } </style>
+    <script type="text/javascript">
+      var cookie = new WebSocket("ws://" + location.host + "/cookie");
+      var sign = "";
+      function senddata(img) {
+        var left = "http://" + location.host + "/bear_left.png";
+        var right = "http://" + location.host + "/bear_right.png";
+        if (img.src == left) img.src = right;
+        else if (img.src == right) img.src = left;
+        cookie.send(sign);
+      }
+      var first = true;
+      cookie.onmessage = function(e) {
+        if (first) {
+          first = false;
+          sign = e.data;
+        } else {
+          alert(e.data)
+          location.reload()
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <center>
+      <img src="./bear_right.png" style="width:30%;height:30%" onclick="senddata(this)">
+    </center>
+  </body>
+</html>
