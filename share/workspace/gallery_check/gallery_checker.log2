@@ -1,0 +1,107 @@
+[2015-10-03 08:03:23,182] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:03:23,189] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:03:23,219] INFO new user fagstlcfzgzprdjf:rovexuxxfgzuptfl on host http://127.0.0.1:8000/register was created, cookies = {'gallery_user': '"2|1:0|10:1443848603|12:gallery_user|4:MTg1|618768eab87aa0d8cd7012a5222839e375aeede9ab8f6936f23c12a74ce4f53f"', 'user': '185'}
+[2015-10-03 08:03:23,220] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:03:23,227] INFO knocked to http://127.0.0.1:8000/
+[2015-10-03 08:03:23,227] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:03:23,237] INFO login fagstlcfzgzprdjf:rovexuxxfgzuptfl on host http://127.0.0.1:8000/login: success, {'gallery_user': '"2|1:0|10:1443848603|12:gallery_user|4:MTg1|618768eab87aa0d8cd7012a5222839e375aeede9ab8f6936f23c12a74ce4f53f"', 'user': '185'}
+[2015-10-03 08:03:23,239] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:03:23,251] INFO putted flag myflag to host http://127.0.0.1:8000/add: 200
+[2015-10-03 08:03:23,252] INFO PUT flag myflag to http://127.0.0.1:8000 user=fagstlcfzgzprdjf pass=rovexuxxfgzuptfl
+[2015-10-03 08:03:52,601] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:03:52,608] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:03:52,617] INFO login fagstlcfzgzprdjf:rovexuxxfgzuptfl on host http://127.0.0.1:8000/login: success, {'gallery_user': '"2|1:0|10:1443848632|12:gallery_user|4:MTg1|55225753f47a8ad81afcb19c04891592a2639586fb33a3ae121c9a87a54bd97d"', 'user': '185'}
+[2015-10-03 08:03:52,618] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:03:52,625] INFO knocked to http://127.0.0.1:8000/
+[2015-10-03 08:03:52,626] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:03:52,633] INFO GET flag myflag from host http://127.0.0.1:8000 from state {'gallery_user': '"2|1:0|10:1443848632|12:gallery_user|4:MTg1|55225753f47a8ad81afcb19c04891592a2639586fb33a3ae121c9a87a54bd97d"', 'user': '185'}
+[2015-10-03 08:03:59,983] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,242] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,249] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,262] INFO new user nfmvnqqbcbprlptf:vffdhxneqjibrodg on host http://127.0.0.1:8000/register was created, cookies = {'gallery_user': '"2|1:0|10:1443848853|12:gallery_user|4:MTg2|203fd0584cf2c12539d5882a608e16e742817f2ca98572b7e9cb81c2b36dfee2"', 'user': '186'}
+[2015-10-03 08:07:33,263] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,273] INFO login nfmvnqqbcbprlptf:vffdhxneqjibrodg on host http://127.0.0.1:8000/login: success, {'gallery_user': '"2|1:0|10:1443848853|12:gallery_user|4:MTg2|203fd0584cf2c12539d5882a608e16e742817f2ca98572b7e9cb81c2b36dfee2"', 'user': '186'}
+[2015-10-03 08:07:33,274] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,281] INFO knocked to http://127.0.0.1:8000/
+[2015-10-03 08:07:33,282] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,289] INFO knocked to http://127.0.0.1:8000/
+[2015-10-03 08:07:33,290] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,298] INFO knocked to http://127.0.0.1:8000/myposts
+[2015-10-03 08:07:33,299] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,301] INFO knocked to http://127.0.0.1:8000/export
+[2015-10-03 08:07:33,302] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,304] INFO knocked to http://127.0.0.1:8000/admin
+[2015-10-03 08:07:33,305] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,306] INFO knocked to http://127.0.0.1:8000/export
+[2015-10-03 08:07:33,307] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,322] INFO putted flag mgovhgwbisvjnikw to host http://127.0.0.1:8000/add: 200
+[2015-10-03 08:07:33,323] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,330] INFO flag mgovhgwbisvjnikw to host http://127.0.0.1:8000/ is checked 0
+[2015-10-03 08:07:33,331] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,340] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,348] INFO knocked to http://127.0.0.1:8000/post/114
+[2015-10-03 08:07:33,349] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,383] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,393] INFO putted flag mgovhgwbisvjnikw to host http://127.0.0.1:8000/edit/114: 200
+[2015-10-03 08:07:33,394] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,407] INFO knocked to http://127.0.0.1:8000/delete/114
+[2015-10-03 08:07:33,408] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 08:07:33,416] INFO knocked to http://127.0.0.1:8000/export114
+[2015-10-03 08:07:33,417] INFO CHK success http://127.0.0.1:8000
+[2015-10-03 19:27:23,623] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:23,633] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:23,669] INFO new user xipcoprtguprlslc:ujilrvstitkilnvh on host http://127.0.0.1:8000/register was created, cookies = {'gallery_user': '"2|1:0|10:1443889643|12:gallery_user|4:MTg4|6e41aa8dc2ec066df637f3877aea3bbd4cde38757e80e742e5820c30b2473d06"', 'user': '188'}
+[2015-10-03 19:27:23,670] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:23,676] INFO knocked to http://127.0.0.1:8000/
+[2015-10-03 19:27:23,677] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:23,688] INFO login xipcoprtguprlslc:ujilrvstitkilnvh on host http://127.0.0.1:8000/login: success, {'gallery_user': '"2|1:0|10:1443889643|12:gallery_user|4:MTg4|6e41aa8dc2ec066df637f3877aea3bbd4cde38757e80e742e5820c30b2473d06"', 'user': '188'}
+[2015-10-03 19:27:23,689] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:23,713] INFO putted flag test to host http://127.0.0.1:8000/add: 200
+[2015-10-03 19:27:23,713] INFO PUT flag test to http://127.0.0.1:8000 user=xipcoprtguprlslc pass=ujilrvstitkilnvh
+[2015-10-03 19:27:42,045] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:42,052] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:42,055] INFO login ztpvhnazqgdvsdzw:kesiwpfiiolyahje on host http://127.0.0.1:8000/login: success, {}
+[2015-10-03 19:27:42,056] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:42,060] INFO knocked to http://127.0.0.1:8000/
+[2015-10-03 19:27:42,061] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:42,066] ERROR flag None on host http://127.0.0.1:8000/myposts was not founded
+[2015-10-03 19:27:42,066] ERROR NOT GET flag from host http://127.0.0.1:8000 from state {}
+[2015-10-03 19:27:58,015] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:58,022] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:58,031] INFO login xipcoprtguprlslc:ujilrvstitkilnvh on host http://127.0.0.1:8000/login: success, {'gallery_user': '"2|1:0|10:1443889678|12:gallery_user|4:MTg4|6f668803eb453d6929378e9d3cb0fe915d80d2c70b405cbf7c602c26e4e1ba27"', 'user': '188'}
+[2015-10-03 19:27:58,032] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:58,039] INFO knocked to http://127.0.0.1:8000/
+[2015-10-03 19:27:58,040] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:27:58,047] INFO GET flag test from host http://127.0.0.1:8000 from state {'gallery_user': '"2|1:0|10:1443889678|12:gallery_user|4:MTg4|6f668803eb453d6929378e9d3cb0fe915d80d2c70b405cbf7c602c26e4e1ba27"', 'user': '188'}
+[2015-10-03 19:28:06,555] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,561] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,574] INFO new user rqunssactlnetmjd:gllgepeuulujjtsz on host http://127.0.0.1:8000/register was created, cookies = {'gallery_user': '"2|1:0|10:1443889686|12:gallery_user|4:MTg5|e0f41f8e9135cf1a257ab50b6ab15c08c01a15612f69f6e2560bc0fcb047ea27"', 'user': '189'}
+[2015-10-03 19:28:06,575] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,589] INFO login rqunssactlnetmjd:gllgepeuulujjtsz on host http://127.0.0.1:8000/login: success, {'gallery_user': '"2|1:0|10:1443889686|12:gallery_user|4:MTg5|e0f41f8e9135cf1a257ab50b6ab15c08c01a15612f69f6e2560bc0fcb047ea27"', 'user': '189'}
+[2015-10-03 19:28:06,590] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,598] INFO knocked to http://127.0.0.1:8000/
+[2015-10-03 19:28:06,598] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,606] INFO knocked to http://127.0.0.1:8000/
+[2015-10-03 19:28:06,607] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,612] INFO knocked to http://127.0.0.1:8000/myposts
+[2015-10-03 19:28:06,613] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,615] INFO knocked to http://127.0.0.1:8000/export
+[2015-10-03 19:28:06,616] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,617] INFO knocked to http://127.0.0.1:8000/admin
+[2015-10-03 19:28:06,617] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,619] INFO knocked to http://127.0.0.1:8000/export
+[2015-10-03 19:28:06,621] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,634] INFO putted flag wimimxamrqcfsvyi to host http://127.0.0.1:8000/add: 200
+[2015-10-03 19:28:06,635] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,643] INFO flag wimimxamrqcfsvyi to host http://127.0.0.1:8000/ is checked 0
+[2015-10-03 19:28:06,644] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,653] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,661] INFO knocked to http://127.0.0.1:8000/post/116
+[2015-10-03 19:28:06,662] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,673] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,684] INFO putted flag wimimxamrqcfsvyi to host http://127.0.0.1:8000/edit/116: 200
+[2015-10-03 19:28:06,685] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,696] INFO knocked to http://127.0.0.1:8000/delete/116
+[2015-10-03 19:28:06,697] INFO Starting new HTTP connection (1): 127.0.0.1
+[2015-10-03 19:28:06,711] INFO knocked to http://127.0.0.1:8000/export116
+[2015-10-03 19:28:06,711] INFO CHK success http://127.0.0.1:8000

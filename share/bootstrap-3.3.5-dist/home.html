@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Title</title>
+		<meta name="viewport" content="width=device-width">
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+	        <script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+	        <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+	
+		 <style type="text/css">
+			body{
+				background: url(body.jpg) repeat #FFFFE0;
+				#background-position: right center;
+				background-attachment: fixed;
+				background-size: 20%;
+			}
+			.container {
+				background: #fff;
+			}
+			.jumbotron {
+				background: url(logo2.png) no-repeat #DDA0DD;
+				background-size: 30%;
+			}			
+		</style>
+	</head>
+  
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<div class="media">					
+					<div class="media-body text-center">
+						<h1 class="media-heading" style="color:#800000;">B.B.B.F.F.</h1>
+						<i>
+							<p class="h3" style="color:#800000;">The Blog for Brony - Best Friends Forever</p>
+						</i>
+					</div>
+				</div>
+				<ul class="nav nav-pills nav-justified pull-right">
+					<li>
+						<a href="#">Home</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+					<li>
+						<a href="#">Contact</a>
+					</li>
+				</ul>
+			</div>			
+		</div>		
+		
+		<div class="container">
+			<h3 class="text-center">Home Page</h3>
+			<div class="bs-example">
+				<ul class="media-list">      
+					<li class="media">
+						<div class="media-body">
+							<h2 class="media-heading">
+								<a href="#">
+								Caption
+								</a>
+							</h2>
+							<h6 class="text-muted">
+								{{ d.date }}
+								from
+								{{ d.author }}
+							</h6>
+							<div class="row">
+								<div class="span4"></div>
+								<div class="span4">
+									<img class="center-block" src="logo.png" border="5"/>
+								</div>
+								<div class="span4"></div>
+							</div>						
+							<h4 class="h5 text-primary text-center">
+								<span>
+									Notes:
+								</span>
+								Some hidden text
+							</h4>  
+							<h4>
+								Vivamus vel egestas diam. Sed congue semper neque, ac imperdiet lacus vulputate non. Vivamus a sem ac purus aliquam pretium ac vel libero. Morbi aliquet feugiat metus, in gravida tellus tempor at. Donec faucibus vel orci id vehicula. Phasellus scelerisque, dui et consequat aliquet, odio purus maximus velit, vitae ullamcorper nulla nisl ut nunc. Sed ac purus nec velit ultrices tempus vel id neque. Nulla ac dapibus nisi. Sed urna mauris, interdum ac elit sit amet, posuere gravida urna. Fusce non tincidunt dolor. Donec dapibus semper turpis, ac congue ipsum tempus consequat. Fusce nec orci a odio consequat dictum in vel nibh. Integer fringilla massa elit, vel ultricies turpis dignissim in. Cras ac magna enim. Nam lobortis pulvinar faucibus. Vivamus eget neque sit amet sem laoreet mollis.
+							</h4>                    
+						</div>
+						<br>
+						<a href="#">
+						  View comments
+						</a>
+						<a href="#">
+						  Edit
+						</a>
+						<hr>
+					</li>
+					
+					<li class="media">
+						<div class="media-body">
+							<h2 class="media-heading">
+								<a href="#">
+								Caption
+								</a>
+							</h2>
+							<h6 class="text-muted">
+								{{ d.date }}
+								from
+								{{ d.author }}
+							</h6>
+							<div class="row">
+								<div class="span4"></div>
+								<div class="span4">
+									<img class="center-block" src="logo2.png" border="5"/>
+								</div>
+								<div class="span4"></div>
+							</div>							                   
+						</div>
+						<br>
+						<a href="#">
+						  View comments
+						</a>
+						<hr>
+					</li>
+					<li class="media">
+						<div class="media-body">
+							<h2 class="media-heading">
+								<a href="#">
+								Caption
+								</a>
+							</h2>
+							<h6 class="text-muted">
+								{{ d.date }}
+								from
+								{{ d.author }}
+							</h6>							
+							<h4>
+								Vivamus vel egestas diam. Sed congue semper neque, ac imperdiet lacus vulputate non. Vivamus a sem ac purus aliquam pretium ac vel libero. Morbi aliquet feugiat metus, in gravida tellus tempor at. Donec faucibus vel orci id vehicula. Phasellus scelerisque, dui et consequat aliquet, odio purus maximus velit, vitae ullamcorper nulla nisl ut nunc. Sed ac purus nec velit ultrices tempus vel id neque. Nulla ac dapibus nisi. Sed urna mauris, interdum ac elit sit amet, posuere gravida urna. Fusce non tincidunt dolor. Donec dapibus semper turpis, ac congue ipsum tempus consequat. Fusce nec orci a odio consequat dictum in vel nibh. Integer fringilla massa elit, vel ultricies turpis dignissim in. Cras ac magna enim. Nam lobortis pulvinar faucibus. Vivamus eget neque sit amet sem laoreet mollis.
+							</h4>                    
+						</div>
+						<br>
+						<a href="#">
+						  View comments
+						</a>
+						<hr>
+					</li>					
+				</ul>			
+			</div>
+			<a href="javascript:scroll(0,0)">Scroll to top</a>
+		</div>	
+			
+		<div class="container">
+			<div class="footer text-center">			
+				<hr>
+				<font color="red">
+					<p class="h3">
+						WARNING!!! ONLY FOR GIRLS UNDER 7 YEARS!
+					</p>				
+					<p class="h4">
+						we are not responsible for possible violations of your psyche
+					</p>
+				</font>
+				<br>
+				<p>
+					MY LITTLE <a href="http://http://ctf.pnzgu.ru/"> IBST.PSU CTF</a>, Penza 2015
+				</p>
+				<p>
+					&copy; Powered by <a href="http://vk.com/gypnocat">Mr.Gypnocat's Coffee&Cupcakes Studio</a> just for lulz
+				</p>			
+			</div>
+		</div>
+	</body>
+</html>

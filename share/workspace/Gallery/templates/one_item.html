@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+	{% block body %}
+			<div class="bs-example">
+				<ul class="media-list">
+					<li class="media">				
+						<h3 class="text-center">
+							<a href="/">
+								{{ entry.title }}
+							</a>
+						</h3>
+						<h6 class="text-muted text-center">
+							{{ locale.format_date(entry.published, full_format=True) }}
+							from
+							{{ entry.name }}
+						</h6>
+						{% if entry.filepath %}
+						<div class="row">
+							<div class="span4"></div>
+							<div class="span4">
+								<img class="center-block" alt="place for ADS" width="80%" src="{{ static_url(entry.filepath) }}" border="5"/>
+							</div>
+							<div class="span4"></div>
+						</div>
+						{% end %}
+						{% if entry.author_enabled %}
+						<h4 class="h5 text-primary text-center">
+							Notes:
+							<span>
+								{{ entry.hidden_text}}
+							</span>
+							<p class="h4">
+								<a href="/edit/{{entry.id}}">
+									Edit
+								</a>
+								<a href="/delete/{{ entry.id }}">
+									Delete
+								</a>
+							</p>
+						</h4>
+						{% end %}
+						<h4 class="col-sm-10 col-sm-offset-1">
+							{{ entry.text}}
+						</h4>                    
+						<hr>	
+					</li>
+					<div class="col-sm-8 col-sm-offset-1">
+						<h3 class="text-primary">
+							Comments
+						</h3>
+					{%if comments%}
+						{% for comment in comments %}
+						<li class="media">						
+							<h5>
+								{{ comment.text }}
+							</h5>     
+							<h6 class="text-muted">
+								{{ locale.format_date(comment.published, full_format=True) }}
+								from
+								{{ comment.name }}
+							</h6>
+						</li>
+						{% end %}
+					{% else %}
+						<li class="media">
+							<h5>
+								No comments
+							</h5>
+							<hr>
+						</li>
+					{% end %}
+					</div>
+				</ul>
+				<form class="form-horizontal" action="" accept-charset="utf-8" method="POST">                    
+                    <div class="col-sm-8 col-sm-offset-1">
+                        <p class="h4 text-primary">Add new comment:</p>
+                    </div>                    
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-1 text-center">
+                            <textarea rows="6" class="form-control" id="text" name="text" placeholder="Comment text" required maxlength="300"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-1">
+							<input type="hidden" name="id" value="{{ entry.id }}"/>
+                            <button class="btn btn-large text-primary" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>				
+				<a href="#">Back</a>
+			</div>
+		{% end %}

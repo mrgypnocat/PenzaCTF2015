@@ -1,0 +1,28 @@
+<{% extends "base.html" %}
+	{% block body %}
+		<form enctype="multipart/form-data" class="form-horizontal col-sm-8 col-sm-offset-2 text-center" action="" accept-charset="utf-8" method="POST">
+			<p class="h4 text-primary">Edit post</p>
+			<div class="form-group">
+				<p>
+					<div class="text-left text-primary">Title</div>
+					<textarea cols="100" rows="1" class="form-control" id="title" name="title" placeholder="Title" maxlength="300">{{ entry.title }}</textarea>
+				</p>
+				<p>
+					<div class="text-left text-primary">Text</div>
+					<textarea cols="100" rows="6" class="form-control" id="text" name="text" placeholder="Comment text" maxlength="300">{{ entry.text }}</textarea>
+				</p>
+				<p>
+					<div class="text-left text-primary">Notes</div>
+					<textarea cols="100" rows="1" class="form-control" id="notes" name="notes" placeholder="Notes" maxlength="300">{{ entry.hidden_text }}</textarea>
+				</p>
+				<div class="text-left text-primary">Load new image</div>
+				<span class="btn btn-default btn-file">
+					<input type="file" name="file">
+				</span>
+
+			</div>
+			<button class="btn btn-link text-primary" type="submit">Submit</button>
+			<a href="/">Cancel</a>
+
+		</form>
+	{% end %}
